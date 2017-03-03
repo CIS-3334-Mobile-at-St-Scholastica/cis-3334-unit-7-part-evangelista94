@@ -1,5 +1,6 @@
 package css.cis3334.heartratetracker;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -46,8 +47,20 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 HeartRate hr = (HeartRate) parent.getItemAtPosition(position);
                 tvSelect.setText("You selected: " + hr.toString());
+
+
+                // Call the second activity
+                String range = hr.getRangeName().toString();
+                Double pulse = Double.parseDouble(hr.getPulse().toString());
+                Intent secActIntent = new Intent(MainActivity.this, Main2Activity.class);
+                secActIntent.putExtra("MainPulse", pulse);
+                secActIntent.putExtra("MainRange", range);
+                startActivity(secActIntent);
             }
+
+
         });
+
 
     }
 }
